@@ -1,0 +1,10 @@
+^C:\USERS\THEIR\DOCUMENTS\GITHUB\CONNECT-4-STARTER\BUILD\CMAKEFILES\928C0439B6E0A9102999CEC5F2011C47\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/their/Documents/GitHub/connect-4-starter -BC:/Users/their/Documents/GitHub/connect-4-starter/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/their/Documents/GitHub/connect-4-starter/build/tictactoe.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

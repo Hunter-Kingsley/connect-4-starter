@@ -1,0 +1,9 @@
+C:/Users/their/Documents/GitHub/connect-4-starter/out/build/Visual Studio Build Tools 2022 Release - x86_amd64/CMakeFiles/Experimental.dir
+C:/Users/their/Documents/GitHub/connect-4-starter/out/build/Visual Studio Build Tools 2022 Release - x86_amd64/CMakeFiles/Nightly.dir
+C:/Users/their/Documents/GitHub/connect-4-starter/out/build/Visual Studio Build Tools 2022 Release - x86_amd64/CMakeFiles/Continuous.dir
+C:/Users/their/Documents/GitHub/connect-4-starter/out/build/Visual Studio Build Tools 2022 Release - x86_amd64/CMakeFiles/NightlyMemoryCheck.dir
+C:/Users/their/Documents/GitHub/connect-4-starter/out/build/Visual Studio Build Tools 2022 Release - x86_amd64/CMakeFiles/demo.dir
+C:/Users/their/Documents/GitHub/connect-4-starter/out/build/Visual Studio Build Tools 2022 Release - x86_amd64/CMakeFiles/PACKAGE.dir
+C:/Users/their/Documents/GitHub/connect-4-starter/out/build/Visual Studio Build Tools 2022 Release - x86_amd64/CMakeFiles/RUN_TESTS.dir
+C:/Users/their/Documents/GitHub/connect-4-starter/out/build/Visual Studio Build Tools 2022 Release - x86_amd64/CMakeFiles/ALL_BUILD.dir
+C:/Users/their/Documents/GitHub/connect-4-starter/out/build/Visual Studio Build Tools 2022 Release - x86_amd64/CMakeFiles/ZERO_CHECK.dir
