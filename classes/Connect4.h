@@ -21,7 +21,7 @@ public:
     void        stopGame() override;
 
 	void        updateAI() override;
-    bool        gameHasAI() override { return true; }
+    bool        gameHasAI() override { return false; }
     Grid*       getGrid() override { return _grid; }
 private:
     // Player constants

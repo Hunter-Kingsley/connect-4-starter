@@ -54,24 +54,23 @@ void Connect4::setStateString(const std::string &s)
 
 bool Connect4::actionForEmptyHolder(BitHolder &holder)
 {
-    if (holder.bit()) return false;
-
     ChessSquare* square = static_cast<ChessSquare*>(&holder);
     int x = square->getColumn();
     int y = square->getRow();
     Player* currentPlayer = getCurrentPlayer();
+    
+    if (_grid->getSquare(x, 0)->bit()) return false;
 
     //std::cout << x << " " << y << std::endl;
 
-    if (!_grid->getSquare(x, 0)->bit()) {
-        Bit* newPiece = createPiece(currentPlayer);
-        ChessSquare* newSquare = findLowestPossibleSquare(square);
-        newPiece->setPosition(newSquare->getPosition());
-        newSquare->setBit(newPiece);
-    }
+    Bit* newPiece = createPiece(currentPlayer);
+    ChessSquare* newSquare = findLowestPossibleSquare(square);
+    newSquare->setBit(newPiece);
+    newPiece->setPosition(_grid->getSquare(x, 0)->getPosition());
+    newPiece->moveTo(newSquare->getPosition());
 
-
-    return false;
+    endTurn();
+    return true;
 }
 
 bool Connect4::canBitMoveFrom(Bit &bit, BitHolder &src)

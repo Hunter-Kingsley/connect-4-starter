@@ -6,7 +6,7 @@
 	CompilerName="C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx86/x64/cl.exe"
 	CompilerVersion="19.44.35217.0"
 	OSName="Windows"
-	Hostname="Hunters-Tower"
+	Hostname="Hunters_Laptop"
 	OSRelease=" Personal"
 	OSVersion=" (Build 26100)"
 	OSPlatform="AMD64"
@@ -14,22 +14,22 @@
 	VendorString="GenuineIntel"
 	VendorID="Intel Corporation"
 	FamilyID="6"
-	ModelID="7"
+	ModelID="10"
 	ModelName=""
 	ProcessorCacheSize="-1"
-	NumberOfLogicalCPU="16"
-	NumberOfPhysicalCPU="8"
-	TotalVirtualMemory="36955"
-	TotalPhysicalMemory="32603"
-	LogicalProcessorsPerPhysical="2"
-	ProcessorClockFrequency="3600"
+	NumberOfLogicalCPU="12"
+	NumberOfPhysicalCPU="10"
+	TotalVirtualMemory="23398"
+	TotalPhysicalMemory="7885"
+	LogicalProcessorsPerPhysical="1"
+	ProcessorClockFrequency="1100"
 	>
 	<Testing>
-		<StartDateTime>Oct 30 20:22 Pacific Daylight Time</StartDateTime>
-		<StartTestTime>1761880930</StartTestTime>
+		<StartDateTime>Oct 31 10:41 Pacific Daylight Time</StartDateTime>
+		<StartTestTime>1761932503</StartTestTime>
 		<TestList/>
-		<EndDateTime>Oct 30 20:22 Pacific Daylight Time</EndDateTime>
-		<EndTestTime>1761880930</EndTestTime>
+		<EndDateTime>Oct 31 10:41 Pacific Daylight Time</EndDateTime>
+		<EndTestTime>1761932503</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>
