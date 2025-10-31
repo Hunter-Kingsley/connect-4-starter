@@ -121,7 +121,7 @@ Player* Connect4::CheckDiag(ChessSquare* square, int direction)
     int x = square->getColumn();
     int y = square->getRow();
 
-    for (int i = 0; i < 4; i += direction)
+    for (int i = 0; std::abs(i) < 4; i += direction)
     {
         if (_grid->getSquare(x+i, y+i) == nullptr || _grid->getSquare(x+i, y)->bit() == nullptr)
         {
