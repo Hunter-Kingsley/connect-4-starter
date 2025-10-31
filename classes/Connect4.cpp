@@ -48,32 +48,91 @@ Player* Connect4::CheckWindow(ChessSquare* square)
     int x = square->getColumn();
     int y = square->getRow();
 
-    bool winFlag = false;
-
     // top left checks
-    winFlag = CheckRow(square);
-    winFlag = CheckCol(square);
-    winFlag = CheckDiag(square, -1);
+    if (CheckRow(square)) {return squareOwner;}
+    if (CheckCol(square)) {return squareOwner;}
+    if (CheckDiag(square, -1)) {return squareOwner;}
 
     // bottom left checks
-    winFlag = CheckRow(_grid->getSquare(x, y+3));
-    winFlag = CheckDiag(_grid->getSquare(x, y+3), 1);
+    if (CheckRow(_grid->getSquare(x, y+3))) {return squareOwner;}
+    if (CheckDiag(_grid->getSquare(x, y+3), 1)) {return squareOwner;}
 
     // top right check
-    winFlag = CheckCol(_grid->getSquare(x+3, y));
+    if (CheckCol(_grid->getSquare(x+3, y))) {return squareOwner;}
+
+    return nullptr;
 }
 
-bool CheckRow(ChessSquare* square)
+bool Connect4::CheckRow(ChessSquare* square)
 {
-    
-}
-bool CheckCol(ChessSquare* square)
-{
+    if (square->bit() == nullptr) {return false;}
 
+    Player* squareOwner = square->bit()->getOwner();
+    int x = square->getColumn();
+    int y = square->getRow();
+
+    for (int i = 0; i < 3; i++)
+    {
+        if (_grid->getSquare(x+1, y)->bit() == nullptr)
+        {
+            return false;
+        }
+
+        if (_grid->getSquare(x+i, y)->bit()->getOwner() != squareOwner)
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
-bool CheckDiag(ChessSquare* square, int direction)
+bool Connect4::CheckCol(ChessSquare* square)
+{
+    if (square->bit() == nullptr) {return false;}
+
+    Player* squareOwner = square->bit()->getOwner();
+    int x = square->getColumn();
+    int y = square->getRow();
+
+    for (int i = 0; i < 3; i++)
+    {
+        if (_grid->getSquare(x, y+i)->bit() == nullptr)
+        {
+            return false;
+        }
+
+        if (_grid->getSquare(x, y+i)->bit()->getOwner() != squareOwner)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+bool Connect4::CheckDiag(ChessSquare* square, int direction)
 {
     // upwards should be 1 or -1 for the function to work
+
+    if (square->bit() == nullptr) {return false;}
+
+    Player* squareOwner = square->bit()->getOwner();
+    int x = square->getColumn();
+    int y = square->getRow();
+
+    for (int i = 0; i < 3; i += direction)
+    {
+        if (_grid->getSquare(x+i, y+i)->bit() == nullptr)
+        {
+            return false;
+        }
+
+        if (_grid->getSquare(x+i, y+i)->bit()->getOwner() != squareOwner)
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 bool Connect4::checkForDraw()
