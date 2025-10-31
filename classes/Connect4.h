@@ -31,9 +31,9 @@ private:
     Player*     ownerAt(int index ) const;
     ChessSquare* findLowestPossibleSquare(ChessSquare* square);
     Player*     CheckWindow(ChessSquare* square);
-    bool        CheckRow(ChessSquare* square);
-    bool        CheckCol(ChessSquare* square);
-    bool        CheckDiag(ChessSquare* square, int direction);
+    Player*        CheckRow(ChessSquare* square);
+    Player*        CheckCol(ChessSquare* square);
+    Player*        CheckDiag(ChessSquare* square, int direction);
     int         negamax(std::string& state, int depth, int playerColor);
 
     Grid*       _grid;
