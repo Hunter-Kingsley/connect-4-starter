@@ -61,10 +61,13 @@ bool Connect4::actionForEmptyHolder(BitHolder &holder)
     int y = square->getRow();
     Player* currentPlayer = getCurrentPlayer();
 
-    if (_grid->getSquare(0, 0)->bit()) {
+    //std::cout << x << " " << y << std::endl;
+
+    if (!_grid->getSquare(x, 0)->bit()) {
         Bit* newPiece = createPiece(currentPlayer);
-        newPiece->setPosition(holder.getPosition());
-        holder.setBit(newPiece);
+        ChessSquare* newSquare = findLowestPossibleSquare(square);
+        newPiece->setPosition(newSquare->getPosition());
+        newSquare->setBit(newPiece);
     }
 
 
@@ -101,6 +104,18 @@ Bit * Connect4::createPiece(Player* player)
 
 Player* Connect4::ownerAt(int index) const
 {
+    return nullptr;
+}
+
+ChessSquare* Connect4::findLowestPossibleSquare(ChessSquare* square) 
+{
+    for (int i = _grid->getHeight() -1; i >= 0; i--) 
+    {
+        if (!_grid->getSquare(square->getColumn(), i)->bit())
+        {
+            return _grid->getSquare(square->getColumn(), i);
+        }
+    }
     return nullptr;
 }
 
