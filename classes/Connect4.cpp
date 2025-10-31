@@ -29,22 +29,85 @@ void Connect4::setUpBoard()
 
 Player* Connect4::checkForWinner()
 {
-    return nullptr;
+    Player* winningPlayer = nullptr;
+
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            winningPlayer = CheckWindow(_grid->getSquare(i, j));
+        }
+    }
+
+    return winningPlayer;
+}
+
+Player* Connect4::CheckWindow(ChessSquare* square)
+{
+    Player* squareOwner = square->bit()->getOwner();
+    int x = square->getColumn();
+    int y = square->getRow();
+
+    bool winFlag = false;
+
+    // top left checks
+    winFlag = CheckRow(square);
+    winFlag = CheckCol(square);
+    winFlag = CheckDiag(square, -1);
+
+    // bottom left checks
+    winFlag = CheckRow(_grid->getSquare(x, y+3));
+    winFlag = CheckDiag(_grid->getSquare(x, y+3), 1);
+
+    // top right check
+    winFlag = CheckCol(_grid->getSquare(x+3, y));
+}
+
+bool CheckRow(ChessSquare* square)
+{
+    
+}
+bool CheckCol(ChessSquare* square)
+{
+
+}
+bool CheckDiag(ChessSquare* square, int direction)
+{
+    // upwards should be 1 or -1 for the function to work
 }
 
 bool Connect4::checkForDraw()
 {
-    return false;
+    for (int i = 0; i < 7; i++) 
+    {
+        if (!_grid->getSquare(i, 0)->bit()) 
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 std::string Connect4::initialStateString()
 {
-    return " ";
+    return std::string (42, '0');
 }
 
 std::string Connect4::stateString()
 {
-    return " ";
+    std::string s(42, '0');
+    _grid->forEachSquare([&](ChessSquare* square, int x, int y) {
+        Bit *bit = square->bit();
+        if (!bit) {
+            s[y * 7 + x] = '0';
+        } else if (bit->getOwner() == getPlayerAt(RED_PLAYER)) {
+            s[y * 7 + x] = '1';
+        } else {
+            s[y * 7 + x] = '2';
+        }
+    });
+    return s;
 }
 
 void Connect4::setStateString(const std::string &s)
@@ -85,7 +148,9 @@ bool Connect4::canBitMoveFromTo(Bit &bit, BitHolder &src, BitHolder &dst)
 
 void Connect4::stopGame()
 {
-
+    _grid->forEachSquare([](ChessSquare* square, int x, int y) {
+        square->destroyBit();
+    });
 }
 
 void Connect4::updateAI() 
@@ -103,7 +168,11 @@ Bit * Connect4::createPiece(Player* player)
 
 Player* Connect4::ownerAt(int index) const
 {
-    return nullptr;
+    auto square = _grid->getSquare(index % 3, index / 3);
+    if (!square || !square->bit()) {
+        return nullptr;
+    }
+    return square->bit()->getOwner();
 }
 
 ChessSquare* Connect4::findLowestPossibleSquare(ChessSquare* square) 

@@ -30,6 +30,7 @@ private:
     Bit *       createPiece(Player* player);
     Player*     ownerAt(int index ) const;
     ChessSquare* findLowestPossibleSquare(ChessSquare* square);
+    Player*     CheckWindow(ChessSquare* square)
     int         negamax(std::string& state, int depth, int playerColor);
 
     Grid*       _grid;
