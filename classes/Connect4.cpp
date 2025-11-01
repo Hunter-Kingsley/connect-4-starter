@@ -44,25 +44,29 @@ Player* Connect4::checkForWinner()
 
 Player* Connect4::CheckWindow(ChessSquare* square)
 {
-
     int x = square->getColumn();
     int y = square->getRow();
+    Player* W = nullptr;
 
     // top left checks
-    if (CheckRow(square)) {return CheckRow(square);}
-    if (CheckCol(square)) {return CheckCol(square);}
-    if (CheckDiag(square, -1)) {return CheckDiag(square, -1);}
+    W = CheckRow(square);
+    if (W) {return W;}
+    W = CheckCol(square);
+    if (W) {return W;}
+    W = CheckDiag(square, -1);
+    if (W) {return W;}
 
     // bottom left checks
-    if (CheckRow(_grid->getSquare(x, y+3))) {return CheckRow(_grid->getSquare(x, y+3));}
-    if (CheckDiag(_grid->getSquare(x, y+3), 1)) {return CheckDiag(_grid->getSquare(x, y+3), 1);}
+    W = CheckRow(_grid->getSquare(x, y+3));
+    if (W) {return W;}
+    W = CheckDiag(_grid->getSquare(x, y+3), 1);
+    if (W) {return W;}
 
     // top right check
-    if (CheckCol(_grid->getSquare(x+3, y))) {return CheckCol(_grid->getSquare(x+3, y));}
+    W = CheckCol(_grid->getSquare(x+3, y));
+    if (W) {return W;}
 
-
-
-    return nullptr;
+    return W;
 }
 
 Player* Connect4::CheckRow(ChessSquare* square)
@@ -98,7 +102,7 @@ Player* Connect4::CheckCol(ChessSquare* square)
 
     for (int i = 0; i < 4; i++)
     {
-        if (_grid->getSquare(x, y+i) == nullptr || _grid->getSquare(x+i, y)->bit() == nullptr)
+        if (_grid->getSquare(x, y+i) == nullptr || _grid->getSquare(x, y+i)->bit() == nullptr)
         {
             return nullptr;
         }
@@ -121,14 +125,14 @@ Player* Connect4::CheckDiag(ChessSquare* square, int direction)
     int x = square->getColumn();
     int y = square->getRow();
 
-    for (int i = 0; std::abs(i) < 4; i += direction)
+    for (int i = 0; std::abs(i) < 4; i++)
     {
-        if (_grid->getSquare(x+i, y+i) == nullptr || _grid->getSquare(x+i, y)->bit() == nullptr)
+        if (_grid->getSquare(x+i, y+(i*direction)) == nullptr || _grid->getSquare(x+i, y+(i*direction))->bit() == nullptr)
         {
             return nullptr;
         }
 
-        if (_grid->getSquare(x+i, y+i)->bit()->getOwner() != squareOwner)
+        if (_grid->getSquare(x+i, y+(i*direction))->bit()->getOwner() != squareOwner)
         {
             return nullptr;
         }
