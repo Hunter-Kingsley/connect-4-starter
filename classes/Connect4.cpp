@@ -27,21 +27,22 @@ void Connect4::setUpBoard()
     startGame();
 }
 
+// Scan the board with a 4x4 window to check all possible combinations
 Player* Connect4::checkForWinner()
 {
-    Player* winningPlayer = nullptr;
-
     for (int i = 0; i < 4; i++)
     {
         for (int j = 0; j < 3; j++)
         {
-            winningPlayer = CheckWindow(_grid->getSquare(i, j));
+            Player* winner = CheckWindow(_grid->getSquare(i, j));
+            if (winner) return winner;
         }
     }
 
-    return winningPlayer;
+    return nullptr;
 }
 
+// Use a 4x4 window to scan the board for possible winning combonations
 Player* Connect4::CheckWindow(ChessSquare* square)
 {
     int x = square->getColumn();
@@ -53,13 +54,13 @@ Player* Connect4::CheckWindow(ChessSquare* square)
     if (W) {return W;}
     W = CheckCol(square);
     if (W) {return W;}
-    W = CheckDiag(square, -1);
+    W = CheckDiag(square, 1);
     if (W) {return W;}
 
     // bottom left checks
     W = CheckRow(_grid->getSquare(x, y+3));
     if (W) {return W;}
-    W = CheckDiag(_grid->getSquare(x, y+3), 1);
+    W = CheckDiag(_grid->getSquare(x, y+3), -1);
     if (W) {return W;}
 
     // top right check
@@ -229,15 +230,6 @@ Bit * Connect4::createPiece(Player* player)
     bit->LoadTextureFromFile(player == getPlayerAt(RED_PLAYER) ? "red.png" : "yellow.png");
     bit->setOwner(player);
     return bit;
-}
-
-Player* Connect4::ownerAt(int index) const
-{
-    auto square = _grid->getSquare(index % 3, index / 3);
-    if (!square || !square->bit()) {
-        return nullptr;
-    }
-    return square->bit()->getOwner();
 }
 
 ChessSquare* Connect4::findLowestPossibleSquare(ChessSquare* square) 

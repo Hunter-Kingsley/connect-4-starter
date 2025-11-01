@@ -28,7 +28,6 @@ private:
     static const int RED_PLAYER = 0;
     static const int YELLOW_PLAYER = 1;
     Bit *       createPiece(Player* player);
-    Player*     ownerAt(int index ) const;
     ChessSquare* findLowestPossibleSquare(ChessSquare* square);
     Player*     CheckWindow(ChessSquare* square);
     Player*        CheckRow(ChessSquare* square);
