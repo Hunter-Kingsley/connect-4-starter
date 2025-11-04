@@ -244,7 +244,54 @@ ChessSquare* Connect4::findLowestPossibleSquare(ChessSquare* square)
     return nullptr;
 }
 
+bool isAIBoardFull(const std::string& state) 
+{
+    return state.find('0') == std::string::npos;
+}
+
+int evaluateAIBoard(const std::string& state)
+{
+
+}
+
 int Connect4::negamax(std::string& state, int depth, int playerColor)
 {
-    return 0;
+    int score = evaluateAIBoard(state);
+
+    // Check if AI wins, human wins, or draw
+    if(depth == 4) { 
+        // A winning state is a loss for the player whose turn it is.
+        // The previous player made the winning move.
+        return -score; 
+    }
+
+    if(isAIBoardFull(state)) {
+        return 0; // Draw
+    }
+
+    int bestVal = -1000; // Min value
+    // for (int y = 0; y < 6; y++) {
+    //     for (int x = 0; x < 7; x++) {
+    //         // Check if cell is empty
+    //         if (state[y * 7 + x] == '0') {
+    //             // Make the move
+    //             state[y * 7 + x] = playerColor == HUMAN_PLAYER ? '1' : '2'; // Set the cell to the current player's color
+    //             bestVal = std::max(bestVal, -negamax(state, depth + 1, -playerColor));
+    //             // Undo the move for backtracking
+    //             state[y * 7 + x] = '0';
+    //         }
+    //     }
+    // }
+
+    for (int i = 0; i < 7; i++)
+    {
+        ChessSquare* topSquare = findLowestPossibleSquare(_grid->getSquare(i, 0));
+        if (topSquare == nullptr) {continue;}
+
+        state[topSquare->getRow() * 7 + topSquare->getColumn()] = playerColor == RED_PLAYER ? '0' : '1';
+        bestVal = std::max(bestVal, -negamax(state, depth + 1, 1- playerColor));
+        state[topSquare->getRow() * 7 + topSquare->getColumn()] = '0';
+    }
+
+    return bestVal;
 }
