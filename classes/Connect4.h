@@ -4,10 +4,10 @@
 class Connect4 : public Game 
 {
 public:
-    Connect4();
+    bool isPlayerFirst;
+    Connect4(bool A);
     ~Connect4();
 
-    // set up the board
     void        setUpBoard() override;
 
     Player*     checkForWinner() override;
@@ -21,7 +21,7 @@ public:
     void        stopGame() override;
 
 	void        updateAI() override;
-    bool        gameHasAI() override { return false; }
+    bool        gameHasAI() override { return true; }
     Grid*       getGrid() override { return _grid; }
 private:
     // Player constants
@@ -30,10 +30,12 @@ private:
     Bit *       createPiece(Player* player);
     ChessSquare* findLowestPossibleSquare(ChessSquare* square);
     Player*     CheckWindow(ChessSquare* square);
-    Player*        CheckRow(ChessSquare* square);
-    Player*        CheckCol(ChessSquare* square);
-    Player*        CheckDiag(ChessSquare* square, int direction);
+    Player*     CheckRow(ChessSquare* square);
+    Player*     CheckCol(ChessSquare* square);
+    Player*     CheckDiag(ChessSquare* square, int direction);
     int         negamax(std::string& state, int depth, int playerColor);
+    int         negamaxAB(std::string& nodeState, int ply, int plyPlayerColor, int alpha, int beta);
+    int         C4evaluateAIBoard(const std::string& state);
 
     Grid*       _grid;
 };
