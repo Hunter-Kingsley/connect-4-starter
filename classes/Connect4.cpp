@@ -308,8 +308,6 @@ int findLowestRowInState(const std::string& s, int col) {
 
 int Connect4::C4evaluateAIBoard(const std::string& state)
 {
-    const int height = 6;
-
     auto scoreWindow = [&](const std::vector<char>& window) {
         int redCount = 0;
         int yellowCount = 0;
@@ -391,7 +389,7 @@ int Connect4::negamaxAB(std::string& nodeState, int ply, int plyPlayerColor, int
         return (plyPlayerColor == RED_PLAYER) ? eval : -eval;
     }
 
-    int best = std::numeric_limits<int>::min() + 1;
+    int best = -9999999999999;
 
     // For each column
     for (int col = 0; col < 7; ++col) {

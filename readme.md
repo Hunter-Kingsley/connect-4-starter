@@ -1,11 +1,1 @@
-Using the provided code that can be downloaded from this github add a new class that inherits from game.cpp in the same way TicTacToe.cpp does and implement a working version of the game Connect 4. The game should be added as a fourth choice from the menu so the choices are Tic Tac Toe, Checkers, Othello and now Connect 4.
-
-The game must be playable by both by 2 people and vs. an AI. Your implementation must check for the winning condition, and display that on the right hand side the same way the current setup does for tic-tac-toe. The stopGame() method is expected to clean up and delete any memory allocated.
-
-Look at the new Grid.cpp class and see how it is used in Checkers.cpp for a good understanding about laying out a useable grid.
-
-For extra credit, when a game piece is added to the board, make it animate into place instead of just appearing in it's final spot.
-
-Graphic files are provided for the game pieces called yellow.png and red.png.
-
-For the submission, create a new github based on the above code-base and provide a link to that along with a complete readme.md on how your implementation works.
+This implementaiton of connect 4 uses a combonaiton of the base code from the tic-tac-toe game as well as the othello game. Othello was refrenced when refering to how the new grid and chessSquare classes worked, and the negamax tic-tac-toe was used as a starter to build a new version that will work with the new constraints. To check the winner, I scan the entire board using a 4x4 window and checking the columns, rows, and diagonals of each one. This ensures that ever possible win condition is checked. The recursive Negamax function is procedurally very similar to how it was set up in Tic-Tac-Toe, however the evaluation function is was needed a lot of changes. I started by writing a small lambda function that counts up how many of each piece there are in a row (this was nice because I could create my count holding varibales and check thier values in the same function/scope). From there it uses the same approach as the win check function, except this works on the state string instead of the board inself.
